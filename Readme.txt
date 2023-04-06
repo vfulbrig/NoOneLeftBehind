@@ -4,6 +4,11 @@
 	Movement: WASD
 	Jump: SPACE
 	Interact/Pickup/Throw: E
+	Open/Close Enchantment Menu: TAB
+	(In Enchantment Menu) Activate Enchantment: SPACE or E
+	
+	To actually choose which character is enchanted, have them interact with a cauldron. Only one character may be
+	enchanted at a time.
 
 
 					+++ Character Abilities +++
@@ -137,4 +142,6 @@ Room 4 -> Have Muriel stand on the red button. Have Bruno press the white button
 	Now you just have to get the crate up there to Bruno. Move Muriel out of the green button area and have Percy go back 
 	down and grab the crate. Use Muriel to raise Percy and the Crate back up the yellow platform and have Percy levitate the
 	crate to the blue button area. Finally, have Bruno place the crate on the blue button and move everyone into the exit.
+
+Room 5 -> This is a test level, silly!
 	
