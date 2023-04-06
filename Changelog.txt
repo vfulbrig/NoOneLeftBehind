@@ -1,0 +1,684 @@
+		++++===<| Update 17 Noclip Gaming |>===++++
+
+		=== General ===
+
+* Finished the enchantment system. The enchantment menu can be opened/closed with TAB. While an enchantment is Active, a
+   character can become enchanted by interacting with any cauldron. Enchantments are not consumed when a character obtains
+   one, though only one character can be enchanted at once.
+	* Sublevel 5 is currently acting as the enchantment testing area. You should be able to walk through the wall in it after
+	   giving a character the Ghost Enchantment.
+
+* Player characters now have color coded silhouettes while ghosting inside a platform. 
+	# Custom Stencil Depth gaming.
+
+* Interacting with a cauldron now removes the enchantment from the last character to use one: Only one character may be enchanted
+  at a time.
+
+* Characters now lose their enchantment when a new level is loaded. Cauldrons also reset to have no enchantment.
+
+* The game *might* have controller support now. I just have a PS4 controller, so I can't test if it is broken or just me. :(
+
+		=== Bugfixes ===
+
+* Fixed a bug where characters could highlight interactables without being controlled as long as they have never been swapped to.
+
+* Fixed a bug where Ghosted characters could pass through level entrances/exits.
+
+* Fixed a bug where character messages could decay while the game was paused.
+	# > Didn't know UE had a premade pause state
+
+	++ Technical ++
+
+* Numbers no longer get printed to the screen whenever the Game State deletes a player character.
+
+* The "Ghostable" variable Moving Platforms have should now properly prevent Moving Platforms from being ghosted through.
+	# UE5 doesn't like it when you set the collision object type in the constructor?
+
+
+		++++===<| Update 16 Vo?d Gaming |>===++++
+
+		=== General ===
+
+* Added rooves to the Map2 levels. 
+	* The interiors are currently lit by a Post-Processing volume with an Ambient Cubemap. The volume has been named
+	   "--> Placeholder Lighting <--". Hide it in the outliner to turn off the lighting.
+
+* Added message boxes. These are cubes that display a message when interacted with.
+
+* The Witch's flight now ends if she is swapped from.
+	# Characters should be immobile while not being controlled by the player unless a platform moves them.
+
+* Increased the range of the Techie's kinesis by another 100 units.
+
+* The entrance doors to levels (the one you come from) are now pink while the exit doors are now black.
+	# If the player backtracks to a previous puzzle, the puzzle they were already on completely resets! I want to make sure
+	   this basically never happens on accident.
+
+* Level Load Airlock doors peek 10 units less from the floor while open. Walking through them should be a slightly less bumpy
+  ride.
+
+* Added cauldrons. Currently, they just give interacting characters the ability to walk through moving platforms/doors.
+	* These aren't currently in any level, so you'll have to spawn one. Good luck not falling through the floor randomly!
+	# No, this is not finished yet.
+
+	=== Map 2 Sublevel 1 (Wittch Intro) ===
+
+* The lower level no longer has a floor material on the ceiling.
+
+	=== Map 2 Sublevel 3 (Anti-Magic Barriers) ===
+
+* The green gate now peeks out from the walls a bit while opened. This should make it consistent with how other moving platforms
+   in the game peek from floors/walls.
+
+* Made the red door transparent so that it is obvious at a glance that it is the exit door.
+
+	=== Map 2 Sublevel 4 (The Big One) ===
+
+* The green platform now lowers an extra 100 units when triggered, making it level with the upper floor of the red door area.
+	# This should make it a bit more obvious that the Techie can grab the crate that spawns on the platform.
+
+* Moved the blue button slightly more to the left to compensate for the Techie's increased kinesis range.
+
+		=== Bugfixes ===
+
+* Level Load Airlocks now wait until all of its doors are closed to unload levels and will no longer give players looking behind them
+  a frightening glimpse at That Which Lies Beyond.
+
+* The Techie now properly despawns when backtracking from M2S2 to M2S1 instead of falling infinitely into [?he Ab?ss].
+	# https://www.youtube.com/watch?v=u9VMfdG873E
+
+* The Witch can no longer press the blue elevator tech console at the top floor of M2S3.
+	* If there are any other tech console she was able to press, those should be fixed too. Forgot to set something in the
+	   blueprint class!
+
+* The cyan door in M2S3 is now the correct height.
+
+	++ Technical ++
+
+* The player should now automatically mark any Actor with a MarkedObjects Component. If every this functionality is ever unwanted,
+   there is a Player Markable value that can be editted in each MarkedObject Component instance.
+
+		!!!! Known Issues !!!!
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+
+
+		++++===<| Update 15 Fat Update Gaming |>===++++
+
+		=== General ===
+
+* Added M2S3 and M2S4.
+
+* Added Anti Magic Barriers. The Witch cannot travel through these while they are active. Some can be turned off via switches.
+
+* Switches and triggerable actors can now be Cyan.
+	# I ran out of colors in one test...
+	# Also, technically they could always be cyan, but the color was named "Exit" before. I never actually ended up using the
+	   "Exit" trigger for anything.
+
+* Finally replaced the BSP's of Map1's level load airlocks with static meshes.
+
+		=== Player Characters ===
+
+* The detection for interacting with objects is now based on where the camera is facing instead of the character. Currently, this 
+   does not account for if the player is looking up or down, so you should not have to aim up or down at interactables; Only side to
+   side.
+	# This feels a bit awkward to me sometimes. Let me know if you guys feel the same: I can revert the change and try just
+	   bumping up the character turn rate.
+
+* The line trace for character interacting is now 125 units higher.
+	* This change is intended to allow The Techie to grab crates that are slightly above him (up to 120 units from his feet to be
+	   exact). Before this change, it was possible for The Techie to levitate a crate somewhere but be unable to pull it back due
+	   to the levitation keeping objects above his head.
+	* The interactions height for buttons and tech consoles have been adjusted accordingly.
+
+* Extended the Techie's levitate/kinesis range from 1200 to 1500.
+	# This is in response to feedback about the Techie needing to stand too close to the edge of platforms to grab crates that
+	    he is suppose to be able to grab. This also makes it easier to make areas that require the Techie to levitate a crate far
+	    away without the Strongman being able to jump out and toss the crate instead.
+
+* The Witch no longer gets knocked back by the doors of level airlocks. No more getting knocked back into the loading zone and
+   unloading the next level by accident!
+	# Things I Hate About Unreal 247: Despite the presence of a corresponding output pin suggesting otherwise, Hit Results
+	    from hit events do not return Physics Materials by default. The actor detecting the collision (Not the actor being collided
+	    with as the option's title might make you assume!) needs to have "Return Material On Move" checked in its collision
+	    settings. It's even under the "Advanced" section just so you don't accidently gaze upon the setting with your virgin eyes
+	    and realize you need it. If you don't have the setting checked, the Hit Physics Material will return nothing and if you
+	    only needed the material's type like I did, Unreal will not so much as grace you with an error message, leaving you
+	    scratching your head to extents that will make the mighty grizzly envious.
+
+	=== Map 1 Sublevel 1 (Strongman Intro) ===
+
+* Adjusted the position of the crate spawning pressure plate so that it can't be stepped on accidently after grabbing the crate.
+	
+	=== Map 1 Sublevel 2 (The Techie Intro) ===
+
+* Adjusted the position of the crate spawning pressure plate so that it can't be stepped on accidently after grabbing the crate.
+	
+* Widened the Red button room a tad bit so that it is harder to levitate the crate into a wall before reaches the pressure plate.
+
+* The red door now peeks a bit from the floor when lowered like all the other doors/platforms in the game do.
+
+	=== Map 1 Sublevel 2 (Two Red Doors) ===
+
+* Adjusted the position and height of the platform the crate spawns on so that it does not look like The Techie should be able to grab
+  the crate (Also, he would be able to grab it anyway after the change to the interaction height).
+
+	=== Map 2 Sublevel 1 (The Witch Intro) ===
+
+* The last surviving stairs in the game have been replaced with ramps.
+
+* More walls have been added.
+
+# I might replace the pillars with floating blocks. What I want is something that will force players to toy around with the Witches
+   flight and get used to how it controls
+
+	=== Map 2 Sublevel 2 (The "All Character" Puzzle) ===
+
+* You now only need the Witch to backtrackto M2S1.
+
+* M2S2 now has a pit before the level proper this is to keep the Techie and Strongman from backtracking with the Witch to M2S1.
+
+* The green platform now takes half the time to move (1s => 0.5s).
+
+* Added a secret.
+	# SPOILER: If you noticed a strange hole in the wall under that very steep ramp, that's why that was there.
+
+		=== Bugfixes ===
+
+* Backtracking has been fixed across the board. You should now be able to access every room of any level you are backtracking to.
+
+* The Witch no longer falls through the floor when spawning on Map2.
+
+* Bruno now correctly displays different dialog when trying to interact with a tech panel, instead of just saying his button lines.
+
+* Bruno no longer tosses crates super high when moving in the Y axis.
+	# Bruno hooping a crate somewhere he isn't suppose to: https://www.youtube.com/watch?v=eUVcFlyNNzU
+
+* Buttons/Tech Consoles are now correctly highlighted by characters who cannot use them.
+
+* Crates now despawn when the sublevel it was spawned in unloads. No more crate duping!
+
+		!!!! Known Issues !!!!
+
+* Levels unload before the loading airlock closes, giving players looking behind them a brief view of [TH? V?ID].
+	# https://www.youtube.com/watch?v=7r0RnCD2Zs0
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+
+
+		++++===<| Update 14 Together Gaming |>===++++
+
+* Added Map2 Sublevel 2. This one has all of the characters!
+	* There aren't any rooves on this one yet. Just in case, you shouldn't need to fly above the walls anywhere to beat the
+	   level.
+
+* Added tech consoles that only the Techie can use, which are introduced in Map2 Sublevel2. They currently have a placeholder
+  model and texture that looks like a multicolored cylinder with a button on it.
+
+* The Witch is now Map2's starting character and there is now a spawn point for her.
+
+* A dialog box now pops up when a character tries to interact with something that they can't use.
+
+* The Witch is no longer knocked back if her flight ends due to hitting the ground.
+
+		!!!! Known Issues !!!!
+
+* Levels unload before the loading airlock closes, giving players looking behind them a brief view of [TH? V?ID].
+	# https://www.youtube.com/watch?v=7r0RnCD2Zs0
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Sometimes, Bruno tosses a crate way up high for no apparent reason.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+
+* The Techie's area in Map1Sublevel 2 is inaccessible when backtracked to unless the player goes in and out of Sublevel 1 first.
+	* This is not as obvious to fix as it appears...
+
+* Backtracking from M1S2 to M1S1 does not work due to the doors blocking the player.
+	# I need to rework how backtracking is programmed.
+
+		++++===<| Update 13 Outline Gaming |>===++++
+
+* Crates and buttons now become outlined when a character being controlled is able to interact with them.
+
+		!!!! Known Issues !!!!
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Sometimes, Bruno tosses a crate way up high for no apparent reason.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+
+* The Techie's area in Map1Sublevel 2 is inaccessible when backtracked to unless the player goes in and out of Sublevel 1 first.
+	* This is not as obvious to fix as it appears...
+
+	++ Technical ++
+
+* For anyone messing around with the Marked Object Component. It now requires you to set a Mesh To Mark value for it to mark
+   anything. Previously, it would mark whichever mesh it felt like marking, which was not consistent even for blueprints of the same
+   class.
+
+
+		++++===<| Update 12 Ramp Gaming |>===++++
+
+* Replaced all stairs in Map1 with ramps.
+
+* Fixed an obnoxiously bright test light in Map1Sublevel2.
+
+* The Solutions txt file that the game comes with has been rewritten as a general Readme with the controls and character abilities
+   added.
+
+		=== Bugfixes ===
+
+* Fixed a bug where pressure plates would sometimes no longer work when Map1Sublevel1 is backtracked to.
+
+		!!!! Known Issues !!!!
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Sometimes, Bruno tosses a crate way up high for no apparent reason.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+
+* The Techie's area in Map1Sublevel 2 is inaccessible when backtracked to unless the player goes in and out of Sublevel 1 first.
+	* This is not as obvious to fix as it appears...
+
+
+		++++===<| Update 11 Stuck Gaming |>===++++
+
+* Moving Platforms are now color coded based on what triggers them.
+
+* Buttons now have their updated models and textures.
+	* To compensate for how narrow the model is, I've expanded the button's collision with a collider that can only be hit
+	   by raycasts.
+
+* Made the orange door in Sublevel 1 and blue door in Sublevel 2 open when the levels are backtracked into (so players can
+  actually enter the level!).
+
+* The blue platform in sublevel 3 now comes out the side of the all instead of rising from the floor.
+	# Solution Spoiler: Now you need the crate to press the button and be levitated to the other side instead of a character
+	   being able to be brought up with the blue platform.
+
+* The beginnings of Map2 are present, but not ready yet. ;)
+
+		=== Bugfixes ===
+
+* Fixed the Z-Fighting when the walls in the second room of Sublevel 1 and Techie area of Sublevel 2 were lowered.
+
+* Moved Sublevel's 3's red pressure plate so that players could not get themselves stuck in the right room.
+	# I'll probably move the button back to it's original position and make an easter egg out of getting stuck.
+
+* The Techie no longer tosses whatever he's holding when swapped away from.
+
+		!!!! Known Issues !!!!
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Sometimes, Bruno tosses a crate way up high for no apparent reason.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+
+		++++===<| Update 10 Sepia Gaming |>===++++
+
+		== General ==
+
+* Added ceilings to each level.
+
+* Added placeholder lighting. 
+	* All placeholder lights have been given a yellow tint to help tell them apart from any finished lighting put in place. They
+	  also have their own folder in the outliner.
+	* All placeholder lights should be in the "Map1PlaceholderLighting" sublevel. Hiding this sublevel should also turn off the
+	  lights.
+		* The skylight (named "SkyLight" in the outliner) responsible for the level's ambient lighting is still in the 
+                               Persistent level.
+
+* The Actors in the outliner have been organized into folders.
+
+		=== Bugfixes ===
+
+* Fixed a bug where a player character carrying a crate would sometimes bump into the crate if they jumped with it.
+
+		!!!! Known Issues !!!!
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Sometimes, Bruno tosses a crate way up high for no apparent reason.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+
+
+		++++===<| Update 9 Wall Gaming |>===++++
+
+	== General ==
+
+* Walls and floors now have their proper textures.
+
+* Levels now have exterior walls.
+	# I didn't place any ceilings because it made the rooms too dark. We'll have to figure out lighting in the future.
+
+* Pressure plates now animate when pressed/unpressed.
+
+* The symbol on pressure plates now glow while triggered.
+	* In particular toggled plates ("O") glow until pressed again while "Pressed" plates ("X") only glow while pressed.
+	* "Once" pressure plates ("!") used for crate spawns always glow.
+
+		!!!! Known Issues !!!!
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Sometimes, Bruno tosses a crate way up high for no apparent reason.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+
+
+		++++===<| Update 8 Style Gaming |>===++++
+
+	== General ==
+
+* Characters now have different colored bodies so that testers can tell the apart. The Strongman is red, the Techie is green, and
+   the Witch is yellow.
+	* I also just now realised that UE5 has a male mannequinn model.
+
+* Pressure plates now have their new model and texture.
+
+	== Bugfixes ==
+
+* The door in front of Sublevel 2's exit now lowers to the correct height.
+
+* Sublevel 2's secret area is now raised to the correct height.
+
+		!!!! Known Issues !!!!
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Sometimes, Bruno tosses a crate way up high for no apparent reason.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+
+
+		++++===<| Update 7 and A Half "Spicy Fix" |>===++++
+		
+	== Bugfixes ==
+
+* Sublevel 3 now loads at the right height. Percy is now allowed to enter it.
+
+		++++===<| Update 7 "I Hate UE Physics Gaming" |>===++++
+
+	== General ==
+
+* Added level 3. If you got stuck or want to make sure you didn't "break" the puzzle, check "Solutions.txt".
+	* Just so you know, though there are no exterior walls, the Interior walls I placed *should* keep you from breaking the
+	   puzzle.
+
+* Added exit halls between sublevels. If every character is in the center of the exit hall, the next sublevel loads, the door to that level
+  opens, and the door to the previous level closes. Returning all characters to the exit hall allows you to backtrack.
+	* The exit hall leading to/from the Percy's introduction is special; Only Bruno is needed to backtrack to the previous
+	   sublevel.
+
+* Crates no longer teleport to their position when lifted and now instead float to their position above the character. If the crate hits
+  anything along the way, the grab is cancelled and the crate is dropped.
+
+* Bruno can no longer toss the crate far away and now always drops it in front of him.
+	# I thought this ability had too much overlap with Percy's general ability to move and grab crates from afar. It is possible
+	   for this ability to make a return, however.
+
+* Bruno can now backtrack to Sublevel 1 from Sublevel 2 without needing a crate to reach the entrance.
+
+	++ Technical ++
+ 
+* Character swapping is now handled by the Game State blueprint instead of a Game Manager. Game States are automatically
+   created whenever a level in Unreal is created, so you shouldn't have to do any setup if you make a new level for some reason.
+
+* It is not longer spelled "BP_MovingPlaform".
+
+	== Bugfixes ==
+
+* Fixed an issue where moving platforms would sometime not move crates set on them, either leaving the crate floating mid-air
+   or simply passing through the crate as it rose.
+	# Things I Hate About Unreal Engine #85: Physics actors will "fall asleep" if not interacted with for a few frames to 
+	   help with performance, except if the actor falls sleep while touching a second actor that has no physics, it will not wake
+	   up if the second actor moves, even if this would leave the physics actor suspended in mid air.
+		# If you run into this same issue, create a Physics Material and set the Sleep Velocity Linear and Sleep
+		   Velocity Angular Thresholds to 0. Maybe set the Sleep Counter Threshold to 0 just in case.
+		# This took me 4 hours to figure out...
+		# https://twitter.com/PPathole/status/1187193709609119744
+
+* You can no longer try to swap characters while only one character is in play.
+
+	!!!! Known Issues !!!!
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Sometimes, Bruno tosses a crate way up high for no apparent reason.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+		 
+			
+		++++===<| Update 6 "Witch Gaming" |>===++++
+	
+	== General ==
+
+* Added the Witch!
+	* Jumping mid-air activates her flight: She will fly wherever the camera is facing. Jumping again causes her to stop
+	   flying.
+		* Pressing forward while flying makes her move faster. Pressing back causes her to slow down.
+		* If she bumps into anything, she'll get booped and knock out her flight. She won't be able to control her
+		   movements for a split second, so watch out!
+	* She is currently in Map 2. She is only here for testing purposes and not meant to be a part of that level.
+
+* You can now press [R] to swap to the previous character.
+
+* Percival's movement is now disabled while levitating something forward.
+
+* If Percival is levitating something forward when swapped from, he will now drop whatever he is levitating.
+
+* The new textures have been integrated:
+	* Boxes now have the new model and texture. The height at which boxes are held has been adjusted to fit the new model's pivot
+	   being at the bottom instead of the center.
+
+* Added a blueprint component that turns actors into Jump Pads; If a player character is overlapping the actor, their jump velocity will be
+  set to that of the Jump Pad Component's as long as it is higher. Percy can even use them!
+	# In the future, these will be used to get Percy and Bruno up to places they can't reach with their normal jump.
+
+* Map 2 can now official be completed!
+
+* Added a blueprint for collectables. They have an adjustable bouncing and rotating animation.
+
+* Added two secret areas:
+	* One is in Map1's starting room. This is opened by pressing the orange button in the next room and using that room's
+	   crate to backtrack to the starting room.
+	* The second is above Map2: This is reached by standing on the door on the glass wall and closing it.
+
+* Added a Liftable Jump Pad. It's a Jump Pad characters can pick up and throw around. You don't have to look down at the pad to pick
+  it up; looking above it will do. You can use this actor if you want to test Jump Pads.
+	
+	== Switches/Triggered Actors ==
+	
+* Switches now have an "Other Actors to Trigger" array that can be editted on each instance. Actors added to this array are triggered by the
+  switch irregardless of their color. 
+
+* Switches and Triggered Actors can now be Colorless.
+	* Colorless Switches only trigger actors added to their "Other Actors to Trigger" array, even if a Triggerable outside the array
+	   is Colorless like the Switch is!
+	* Colorless Triggerables can only be triggered by Switches that have added them to their "Other Actors to Trigger" array. Switches
+	   will never otherwise trigger Colorless Triggerables, even if the switch itself is Colorless.
+
+* Object Spawners now show their display name and what they will spawn as text. The text color is based on the Object Spawner's Trigger
+  Color. This text is hidden during gameplay.
+
+* The Exit color is now Cyan instead a confusingly-close-to-purple magenta.
+
+	== Bugfixes ==
+
+* Fixed a bug where characters would not have physics unless swapped to.
+
+* Fixed a bug where Percival could give an object he's holding collision if the player swaps characters the moment his 
+
+* Fixed a bug in which liftable objects would remember every character that picked them up and cancel the charge-up of their throws 
+   when destroyed.
+	# This was the obscure bug I was talking about ;)
+
+	!!!! Known Issues !!!!
+
+ * Percival's box levitation is still stiff.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+
+
+		++++===<| Update 5 "Pro Crate Gaming" |>===++++
+
+	== General ==
+
+* The physics of liftable actors have been adjusted:
+	* Their center-of-mass is set so that they are now bottom-heavy: This should keep crates from tipping over when tossed.
+	* The physics material has more friction and a bit of bounciness to help flatten their landings a bit more.
+
+* Liftable actors are now held above the player's head and no longer have collision/physics while held.
+
+* Throwing liftables has been overhauled:
+	* Tapping the throw button now tosses the liftable so that it lands right in front of you.
+	* Holding and releasing the throw button as Bruno allows him to throw objects farther.
+	* Holding the throw button as Percival allows him to levitate the box forward until either the button is released or a max range
+	  is hit.
+
+	!!!! Known Issues !!!!
+
+ * Percival's box levitation is a bit stiff.
+
+ * Moving while levitating something as Percival is probably wonky. 
+	* I'll probably just stop him from moving while levitating in the future.
+
+ * Characters (still) neither update their physics nor their animations when swapped from.
+
+
+		++++===<| Update 4 "Techie Gaming" |>===++++
+
+	== General ==
+
+* Added the Strongman character "Bruno".
+	* He can't press buttons, but can jump.
+
+* Added the Techie character "Percival"
+	* He can press buttons but can't jump.
+	* His self-modified Gucci wheelchair allows him to move 30% faster.
+	* His personal Mobeus Psionic Amplifier allows him to grab boxes from up to 12 meters away.
+
+* If a character is holding an actor, other characters may grab it from them as if picking the object up from the ground.
+
+* Crates no longer have Angular Dampening, which reduced all rotational force drastically.
+	* This means they should no longer teeter in slow motion when placed off a ledge.
+
+	++ Technical ++
+
+* Sublevels have been renamed to the format "Map#Sublevel#" instead of "Map#Area#". This way, the map format makes more sense at a
+  glance.
+
+* BP_CharacterBase now has separate event graphs for movement inputs and "action" (Interacting, Character Swapping, etc.) inputs.
+	* From now on (assuming I missed nothing), the default event graph will only be used for default Unreal events such as Tick and
+	  begin play.
+
+	!!!! Known Issues !!!!
+
+* Crates currently have non-standard physics when grabbed.
+	* They go through objects that they land into during the player's jump.
+	* They can easily be pushed through objects while grabbed.
+	* They don't play nice with stairs.
+
+* Characters neither update their physics nor their animations when swapped from. 
+	* Bruno can fly!
+
+
+		++++===<| Update 3 "Button Gaming" |>===++++
+ 
+(Make sure you select the Map1 level and not any of its sublevels!)
+
+	== General ==
+
+* Area 3 is mostly blocked out. You still only have one character, so it's not yet playable. The button that would spawn a ramp and button
+  that would open the exit currently does not function.
+
+* Buttons have been added. Press "E" while close to one to press it.
+
+* A level streaming actor has been added. The future idea is to have an "air lock" room between sublevels to hide the loading.
+
+* There is a test area next to Area 1 for trying out different door sizes. The hole in the ground is in case we want a hatch.
+
+
+		++++===<| Update 2 "Crate Gaming" |>===++++
+	
+	== General ==
+
+* You can now properly lift and put down the crate. Stand close to it and press "E". The crate can even press buttons!
+	* To spawn the crate, press the yellow button in the second room (the one with the glass walls).
+
+* Spawners have been added. They can spawn any class of Actor. Like a crate, for instance.
+	* Spawners can only have one of their Actors spawned at a time. When a new Actor is spawned, the old one is deleted.
+
+* The second room has been completed. Note that the current rooms are highly liable to be sledgehammered and redesigned.
+	* In the very near future, I will create a room design document.
+
+* Pressure plates have a placeholder texture and material.
+
+* The long platform used to see if the Character could B-Hop is gone forever...
+
+	++ Technical ++
+
+* On the off chance one of you need/want to edit something, most if not all Blueprints as well as their variables and functions have
+   descriptions. Don't be afraid to ask if I accidently did an impression of UE's documentation (i.e. explained something poorly/not at all)
+
+* The ThirdPersonCharacter folder has been deleted. The game mode file is in Blueprints/Misc and the Default Map is in Levels.
