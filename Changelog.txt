@@ -1,3 +1,39 @@
+		++++===<| Update 18 Standard Galactic Alphabet Gaming |>===++++
+
+* M2S5 has been completed. Let me know if the enchantment tutorial explains everything well!
+
+* Characters now count as magical for the purpose of Anti-Magic barriers while enchanted.
+
+* Increased the walking speed of all characters by 20%.
+	# With 3 characters and puzzles being bigger and more complicated, I wanted to shorten the time it takes to move
+	    characters from place to place.
+
+* Interacting with a cauldron while under the effects of the active enchantment now removes the enchantment from the character.
+
+* There is now support for multi-page dialogue.
+
+* Made colorless objects a bit darker to distinguish them further from the color of walls.
+
+		=== Bugfixes ===
+
+* Fixed a bug where characters that aren't the map's starting character could not grab enchanting ingredients.
+
+* Fixed a bug where the player could select and attempt to activate enchantments that were not in play.
+
+		!!!! Known Issues !!!!
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+	# This one ain't getting fixed until after Fractal, if at all, since Jump Pads won't be in the Fractal release.
+
+
 		++++===<| Update 17 Noclip Gaming |>===++++
 
 		=== General ===
