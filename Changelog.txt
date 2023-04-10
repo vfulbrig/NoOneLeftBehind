@@ -1,3 +1,37 @@
+		++++===<| Update 19 Everyone's Magical Gaming |>===++++
+
+* Added M2S6. Hope you like Anti-Magic!
+
+* Anti-magic barriers can be set to start disabled and become enabled when triggered.
+
+* Raised the cyan button in M2S3 (Anti-Magic Fields) so that the Techie couldn't get himself stuck.
+
+* The Witch no longer gets booped by switches if she runs into them while flying.
+
+		=== Bugfixes ===
+
+* Fixed the purple doors in M2S3 (Anti-Magic Fields) Z-fighting while lowered.
+
+* Fixed some objects being permanent loading.
+
+* Fixed Muriel's flight tutorial message box having the placeholder "I am a floating question mark" text.
+
+* The Strongman's "prison door" in M2S2 should now correctly peek from the floor when lowered like other moving platforms do.
+
+		!!!! Known Issues !!!!
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+	# This one ain't getting fixed until after Fractal, if at all, since Jump Pads won't be in the Fractal release.
+
+
 		++++===<| Update 18 Standard Galactic Alphabet Gaming |>===++++
 
 * M2S5 has been completed. Let me know if the enchantment tutorial explains everything well!

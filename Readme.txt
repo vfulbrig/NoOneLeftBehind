@@ -7,8 +7,10 @@
 	Open/Close Enchantment Menu: TAB
 	(In Enchantment Menu) Activate Enchantment: SPACE or E
 	
-	To actually choose which character is enchanted, have them interact with a cauldron. Only one character may be
-	enchanted at a time.
+	To actually choose which character is enchanted, have them interact with a cauldron. If a character is already enchanted,
+	the enchantment will be transfered over to the new character.
+
+	Having a character interact with a cauldron while already enchanted removes the enchantment.
 
 
 					+++ Character Abilities +++
@@ -143,5 +145,28 @@ Room 4 -> Have Muriel stand on the red button. Have Bruno press the white button
 	down and grab the crate. Use Muriel to raise Percy and the Crate back up the yellow platform and have Percy levitate the
 	crate to the blue button area. Finally, have Bruno place the crate on the blue button and move everyone into the exit.
 
-Room 5 -> This is a test level, silly!
+Room 5 -> Collect the ingredient next to the cauldron and activate the "ghost enchantment". All moving platforms and grey walls can 
+	be bypassed while a character has the ghost enchantment.Give the enchantment to Percy by having him interact with
+	the cauldron. Then have him walk on the other side of the gray wall and step on the gray button to summon a crate on the
+	other side of a glass grey wall. Ghosted characters can still walk through walls while carrying a crate, so you should be
+	able to grab the crate and carry it back on the other side of the gray wall. Set the crate on the red button and move the
+	Techie onto the lowered red platform.
+
+	Give each the of remaining two characters the ghost enchantment and move them to the red platform. Before moving the
+	final character to the red platform, have them interact with the second cauldron on the other side of the grey wall to
+	remove the enchantment from them (Otherwise, they'll go through the platform instead of being lifted!). Once all the
+	characters are on the red platform, swap to Percy and levitate the crate from atop the red platform. This should move
+	all characters to the exit area.
+
+Room 6 -> Collect the ingredient in the center of the room and activate the ghost enchantment (but don't give it to anyone yet!).
+	As either Percy or Bruno, walk past the blue anti-magic barrier and disable it by standing on the blue button. Then,
+	give any character the ghost enchantment and step onto the purple button to toggle it. This will lower the anti-magic
+	barrier blocking enchanted characters from reaching the yellow button. 
+
+	Swap to any character other than Muriel and, after enchanting them, walk through the grey wall and onto the yellow
+	button. This will open the way to the exit, but also toggle on an anti-magic barrier blocking the way the character came in
+	from. There is a second exit not blocked by a wall, but it also has an anti-magic barrier, so the character will be unable to
+	reach the exit unless they can somehow remove their enchantment! This can be done by having a character transfer the 
+	enchantment to themselves by interacting with the cauldron. Once you have done this, move the character in the yellow 
+	button room out via the second exit up the ramp. Then move them and every other character to the exit.
 	
