@@ -1,3 +1,76 @@
+		++++===<| Update 19 Final Mission Gaming |>===++++
+
+		=== General ===
+
+* Added M2S7. This is last puzzle I'm making for the Fractal release!
+
+* Added an overlap volume at the end of Map1 that sends the player to Map2.
+	# The exit room itself is still a WIP.
+
+* The messages for adding/transfering/removing enchantments are now more detailed, saying who was enchanted, what
+   enchantment was received/removed, and if it was transfered from someone else.
+
+* Liftables can no longer be ghosted through.
+	# Even if I continue this project, this interaction feels too niche to be part of an actual puzzle.
+
+	=== Character Changes ===
+
+* Adjusted the Witch's flight:
+	* Reduced the bounciness of the "boop" effect from flying into walls from 80% to 60%.
+	* The Witch is no longer knocked out of her flight if she hits a wall while braking.
+	* The Witch's braking speed has been raised from 66% of her base speed to 75%.
+	# Hopefully getting the Witch out of tight spots should be less annoying. I added a message box telling the player how
+	   braking might be helpful for tight spots at the end of M2S1.
+
+* Particles now spawn around any character that is enchanted: You can now actually tell which character is enchanted.
+	# If you're better with particle systems than I am, feel free to take a crack at improving this!
+
+* You can no longer throw liftables while something is passing through them. Antimagic barriers should get ignored.
+
+* Increased the Techie's kinesis range by another 150 units.
+
+	=== Map 1 Sublevel 1 (Bruno Intro) ===
+
+* The message box in the first room now actually tells you how to play the game instead of telling the player that it is a floating
+   question mark. It even plays its message automatically when the game starts!
+
+* Put the X/O button tutorial message in a harder to miss spot.
+
+	=== Map 1 Sublevel 2 (Techie Intro) ===
+
+* The Message Box for kinesis no longer calls the Techie Percy.
+	# "Don't call me that." - Percival
+
+	=== Map 2 Sublevel 2 (All Character Puzzle) ===
+
+* Added a funni message at the beginning of the puzzle.
+
+	=== Map 2 Sublevel 4 (The Big One) ===
+
+* Inched the blue button another 50 units to the left to compensate for the Techie's increased kinesis range.
+ 		
+		=== Bugfixes ===
+
+* Crates thrown by Bruno are now correctly aimed based on the camera facing instead of the character facing.
+
+* Deleted some tutorial texts I forgot about.
+
+		!!!! Known Issues !!!!
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* For some reason the character message adjusts itself when shown for the first time, causing the text to flicker.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+	# This one ain't getting fixed until after Fractal, if at all, since Jump Pads won't be in the Fractal release.
+
+
 		++++===<| Update 19 Everyone's Magical Gaming |>===++++
 
 * Added M2S6. Hope you like Anti-Magic!
