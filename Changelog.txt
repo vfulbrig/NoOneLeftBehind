@@ -1,3 +1,56 @@
+		++++===<| Update 20 Door Gaming |>===++++
+
+* Added the finished models and textures to Anti-Magic Barriers, Techie Consoles, and sublevel exits.
+
+* Added proper exit sublevels to each of the maps, complete with a screen showing the player's stat.
+	* By stats, I just mean how many secret orbs they have found.
+	# Enjoy the goofy Map1 sound while it lasts!
+
+* Add roofs to the rest of the levels.
+
+* The player now exits maps by having a character interact with a door.
+
+* Widened the collision for anti-magic barriers.
+	# I'm hoping this will discourage players from trying to clip through double layers anti-magic barriers by activating
+	   them one at a time.
+		# (Unfortunately this is still possible...)
+
+	=== Map 2 Sublevel 2 ("All Character Puzzle") ===
+
+* Added a hint about using 'R' to swap to a previous character.
+
+	=== Map 2 Sublevel 3 ("Anti-Magic Barriers") ===
+
+* Added a message box explaining Anti-Magic Barriers.
+
+* All the moving walls in Map1 now reach to the ceiling when closed.
+
+		=== Bugfixes ===
+
+* Secret Orbs no longer respawn when the level they are in is reloaded.
+
+* Fixed the player clipping through the elevator as it rises in M2S3.
+
+* Sublevel's 5-7 should now let you into the level when backtracking.
+
+* Fixed the ceiling in M2S1's intro room not loading correctly.
+
+		!!!! Known Issues !!!!
+
+* Player Characters go through crates that are held by other characters.
+	# I'm putting this one on the backburner since this interaction isn't really intrusive to gameplay.
+
+* Crates get launched unusually high when a moving platform lifts them.
+
+* Percival's box levitation is still stiff. Also, rotating while pulling a crate toward you also rotates the crate.
+
+* For some reason the character message adjusts itself when shown for the first time, causing the text to flicker.
+
+* Characters appear to be standing on nothing when standing on Liftable Jump Pads. Animation while walking on them is generally
+  awkward. I *think* this is just cosmetic since the offending collider isn't suppose to effect anything other than linetraces.
+	# This one ain't getting fixed until after Fractal, if at all, since Jump Pads won't be in the Fractal release.
+
+
 		++++===<| Update 19 Final Mission Gaming |>===++++
 
 		=== General ===
